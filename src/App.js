@@ -12,9 +12,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Dashboard from "./pages/Dashboard";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import Footer from "./components/Footer";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   const toggleDarkMode = () => {
     setDarkMode((prevMode) => !prevMode);
@@ -75,6 +76,7 @@ function App() {
       <CssBaseline />
       <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <Dashboard />
+      <Footer />
     </ThemeProvider>
   );
 }

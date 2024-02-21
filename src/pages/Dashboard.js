@@ -20,22 +20,13 @@ import {
   faMapLocationDot,
   faRefresh,
 } from "@fortawesome/free-solid-svg-icons";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
-import { DatePicker } from "@mui/lab";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import Line from "../utils/chart";
+import CountryTable from "../utils/table";
 
 export default function Dashboard() {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-
-  const handleStartDateChange = (date) => {
-    setStartDate(date);
-  };
-
-  const handleEndDateChange = (date) => {
-    setEndDate(date);
-  };
   return (
     <Box sx={{ py: 10, px: { md: 6, xs: 2 } }}>
       {/* Headers */}
@@ -51,7 +42,7 @@ export default function Dashboard() {
               </Grid>
               <Grid item>
                 <Typography variant="h4">300</Typography>
-                <Typography variant="p">Total Avilable</Typography>
+                <Typography variant="p">Total Available</Typography>
               </Grid>
             </Grid>
           </Paper>
@@ -68,7 +59,7 @@ export default function Dashboard() {
               </Grid>
               <Grid item>
                 <Typography variant="h4">300</Typography>
-                <Typography variant="p">Total Avilable</Typography>
+                <Typography variant="p">Country Total</Typography>
               </Grid>
             </Grid>
           </Paper>
@@ -113,14 +104,14 @@ export default function Dashboard() {
                   defaultValue="month"
                   name="radio-buttons-group"
                 >
-                  <Grid item>
+                  <Grid item md={6} xs={12}>
                     <FormControlLabel
                       value="month"
                       control={<Radio />}
                       label="Month"
                     />
                   </Grid>
-                  <Grid item>
+                  <Grid item md={6} xs={12}>
                     <FormControlLabel
                       value="day"
                       control={<Radio />}
@@ -132,10 +123,31 @@ export default function Dashboard() {
             </FormControl>
           </Grid>
           <Grid item md={4} xs={6}>
-            {/* Date Picker */}
+            {/* Date Picker */}{" "}
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Grid container>
+                <Grid item md={6} xs={12}>
+                  <DatePicker />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <DatePicker />
+                </Grid>
+              </Grid>
+            </LocalizationProvider>
           </Grid>
         </Grid>
       </Box>
+      {/*  */}
+
+      {/* Chart & Table */}
+      <Grid container>
+        <Grid item md={6} xs={12}>
+          <Line />
+        </Grid>
+        <Grid item md={6} xs={12}>
+          <CountryTable />
+        </Grid>
+      </Grid>
     </Box>
   );
 }
