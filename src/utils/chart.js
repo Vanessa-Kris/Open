@@ -20,8 +20,8 @@ export default function Line({ data, year = "2022" }) {
             label: "Users",
           },
         ]}
-        width={500}
-        height={300}
+        width={600}
+        height={370}
       />
     </Box>
   );

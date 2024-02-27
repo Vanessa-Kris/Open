@@ -16,7 +16,7 @@ export default function UserTable({ data, year = "2022" }) {
   const counts = data[year].map((item) => item[1]);
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{ height: 350, width: "100%" }}>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>

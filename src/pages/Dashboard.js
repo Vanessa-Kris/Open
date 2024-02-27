@@ -213,7 +213,7 @@ export default function Dashboard() {
           {/* <Map /> */}
         </Grid>
         <Grid item md={6} xs={12}>
-          <CountryTable />
+          <CountryTable data={data} />
         </Grid>
       </Grid>
     </Box>

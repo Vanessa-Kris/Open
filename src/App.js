@@ -52,12 +52,12 @@ function App() {
           light: "#456990",
         },
         secondary: {
-          main: "#000000",
+          main: "#101418",
           light: "#525866",
         },
         background: {
-          default: "#212529",
-          paper: "#212121",
+          default: "#101418",
+          paper: "#0A233D",
         },
         text: {
           primary: "#F6F4F3", //white smoke
