@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   FormControl,
@@ -12,7 +12,6 @@ import {
   Radio,
   FormLabel,
   FormControlLabel,
-  TextField,
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -20,13 +19,62 @@ import {
   faMapLocationDot,
   faRefresh,
 } from "@fortawesome/free-solid-svg-icons";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Line from "../utils/chart";
 import CountryTable from "../utils/table";
+// import Map from "../utils/map";
+import UserTable from "../utils/dataTable";
 
 export default function Dashboard() {
+  const baseUrl = process.env.REACT_APP_API_URL;
+
+  // Set default start date and end date to current date
+  const currentDate = new Date().toISOString().split("T")[0];
+  const [startDate, setStartDate] = useState(currentDate);
+  const [endDate, setEndDate] = useState(currentDate);
+  const [type, setType] = useState("available");
+  const [format, setFormat] = useState("month");
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchData();
+  }, [startDate, endDate, type, format]);
+
+  const fetchData = () => {
+    setLoading(true);
+    let URL = `${baseUrl}/users?start=${startDate}&end=${endDate}&type=${type}&format=${format}`;
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("fetched data", data);
+        setData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      });
+    console.log(URL); // Just for demonstration
+  };
+
+  const handleFormatChange = (event) => {
+    setFormat(event.target.value);
+  };
+
+  const handleTypeChange = (event) => {
+    setType(event.target.value);
+  };
+
+  const handleStartDateChange = (date) => {
+    const formattedDate = date.toISOString().split("T")[0];
+    setStartDate(formattedDate);
+  };
+
+  const handleEndDateChange = (date) => {
+    const formattedDate = date.toISOString().split("T")[0];
+    setEndDate(formattedDate);
+  };
+  // console.log("countries", data.countries);
   return (
     <Box sx={{ py: 10, px: { md: 6, xs: 2 } }}>
       {/* Headers */}
@@ -41,7 +89,7 @@ export default function Dashboard() {
                 />
               </Grid>
               <Grid item>
-                <Typography variant="h4">300</Typography>
+                <Typography variant="h4">{data.total_users}</Typography>
                 <Typography variant="p">Total Available</Typography>
               </Grid>
             </Grid>
@@ -58,7 +106,7 @@ export default function Dashboard() {
                 />
               </Grid>
               <Grid item>
-                <Typography variant="h4">300</Typography>
+                <Typography variant="h4">{data.total_countries}</Typography>
                 <Typography variant="p">Country Total</Typography>
               </Grid>
             </Grid>
@@ -89,9 +137,9 @@ export default function Dashboard() {
           <Grid item md={4} xs={6}>
             <FormControl fullWidth>
               <InputLabel>Select Type</InputLabel>
-              <Select label="Type">
-                <MenuItem>Available Users</MenuItem>
-                <MenuItem>Sign-Up Users</MenuItem>
+              <Select value={type} onChange={handleTypeChange} label="Type">
+                <MenuItem value="available">Available Users</MenuItem>
+                <MenuItem value="signup">Sign-Up Users</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -100,6 +148,8 @@ export default function Dashboard() {
               <FormLabel id="demo-radio-buttons-group-label">Format</FormLabel>
               <Grid container>
                 <RadioGroup
+                  value={format}
+                  onChange={handleFormatChange}
                   aria-labelledby="demo-radio-buttons-group-label"
                   defaultValue="month"
                   name="radio-buttons-group"
@@ -124,16 +174,24 @@ export default function Dashboard() {
           </Grid>
           <Grid item md={4} xs={6}>
             {/* Date Picker */}{" "}
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Box>
               <Grid container>
                 <Grid item md={6} xs={12}>
-                  <DatePicker />
+                  <input
+                    type="date"
+                    value={startDate}
+                    onChange={handleStartDateChange}
+                  />
                 </Grid>
                 <Grid item md={6} xs={12}>
-                  <DatePicker />
+                  <input
+                    type="date"
+                    value={endDate}
+                    onChange={handleEndDateChange}
+                  />
                 </Grid>
               </Grid>
-            </LocalizationProvider>
+            </Box>
           </Grid>
         </Grid>
       </Box>
@@ -141,8 +199,18 @@ export default function Dashboard() {
 
       {/* Chart & Table */}
       <Grid container>
+        <Grid item md={6} xs={12} sx={{ width: "100%" }}>
+          <Line data={data} />
+        </Grid>
         <Grid item md={6} xs={12}>
-          <Line />
+          <UserTable data={data} />
+        </Grid>
+      </Grid>
+
+      {/* Map & Table */}
+      <Grid container sx={{ mt: 4 }}>
+        <Grid item md={6} xs={12}>
+          {/* <Map /> */}
         </Grid>
         <Grid item md={6} xs={12}>
           <CountryTable />
