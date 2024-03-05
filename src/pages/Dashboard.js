@@ -23,6 +23,7 @@ import Line from "../utils/chart";
 import CountryTable from "../utils/table";
 // import Map from "../utils/map";
 import UserTable from "../utils/dataTable";
+import CountryMap from "../utils/map";
 
 export default function Dashboard() {
   const baseUrl = process.env.REACT_APP_API_URL;
@@ -46,7 +47,6 @@ export default function Dashboard() {
     fetch(URL)
       .then((response) => response.json())
       .then((data) => {
-        console.log("fetched data", data);
         setData(data);
         setLoading(false);
       })
@@ -74,7 +74,6 @@ export default function Dashboard() {
     const formattedDate = date.toISOString().split("T")[0];
     setEndDate(formattedDate);
   };
-  // console.log("countries", data.countries);
   return (
     <Box sx={{ py: 10, px: { md: 6, xs: 2 } }}>
       {/* Headers */}
@@ -210,7 +209,7 @@ export default function Dashboard() {
       {/* Map & Table */}
       <Grid container sx={{ mt: 4 }}>
         <Grid item md={6} xs={12}>
-          {/* <Map /> */}
+          {/* <CountryMap data={data} /> */}
         </Grid>
         <Grid item md={6} xs={12}>
           <CountryTable data={data} />

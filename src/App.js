@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import Footer from "./components/Footer";
+import { HeadProvider } from "react-head";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -48,7 +49,7 @@ function App() {
       palette: {
         mode: "dark",
         primary: {
-          main: "#325FC6",
+          main: "#101418",
           light: "#456990",
         },
         secondary: {
@@ -72,12 +73,34 @@ function App() {
     darkMode ? customPalette.dark : customPalette.light
   );
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <Dashboard />
-      <Footer />
-    </ThemeProvider>
+    <HeadProvider>
+      <div className="Home">
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.anychart.com/releases/8.9.0/css/anychart-ui.min.css"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.anychart.com/releases/8.9.0/fonts/css/anychart-font.min.css"
+        ></link>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+          <Dashboard />
+          <Footer />
+          <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-base.min.js"></script>
+          <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-map.min.js"></script>
+          <script src="https://cdn.anychart.com/geodata/latest/custom/world/world.js"></script>
+          <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-data-adapter.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
+          <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-exports.min.js"></script>
+          <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-ui.min.js"></script>
+          <script src="https://cdn.anychart.com/themes/2.0.0/dark_blue.min.js"></script>
+        </ThemeProvider>
+      </div>
+    </HeadProvider>
   );
 }
 
