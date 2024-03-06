@@ -31,12 +31,12 @@ function App() {
           light: "#E4FDE1",
         },
         secondary: {
-          main: "#325FC6",
+          main: "#5EA2F8",
           light: "#F26430",
         },
         background: {
           default: "#FFFFFF",
-          paper: "#FFFCF9",
+          paper: "#F8F8F8",
         },
         text: {
           primary: "#2b2929",
@@ -53,12 +53,12 @@ function App() {
           light: "#456990",
         },
         secondary: {
-          main: "#101418",
+          main: "#000",
           light: "#525866",
         },
         background: {
           default: "#101418",
-          paper: "#0A233D",
+          paper: "#133C55",
         },
         text: {
           primary: "#F6F4F3", //white smoke
@@ -118,7 +118,7 @@ export function NavBar({ darkMode, toggleDarkMode }) {
         <Box sx={{ display: "flex" }}>
           <Box
             component="img"
-            src="/logo.png"
+            src="/icon.png"
             sx={{
               width: "35px",
             }}

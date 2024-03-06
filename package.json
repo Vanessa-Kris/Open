@@ -1,9 +1,10 @@
 {
-  "name": "open",
+  "name": "SWOBTelemetry",
   "version": "0.1.0",
   "private": true,
-  "author": "SMSWithoutBorders",
-  "description": "open source tool for monitoring SMSWithoutBorders statistics. ",
+  "author": "Minion <nessakristo@gmail.com>",
+  "description": "Open source tool for monitoring SMSWithoutBorders statistics (demo version). ",
+  "website": "https://smswithoutborders.com",
   "main": "./public/electron.js",
   "homepage": "./",
   "dependencies": {
@@ -70,8 +71,8 @@
     "wait-on": "^7.2.0"
   },
   "build": {
-    "appId": "com.electron.myapp",
-    "productName": "My Electron App",
+    "appId": "SWOBTelemetry0.1",
+    "productName": "SWOBTelemetry",
     "files": [
       "build/**/*",
       "node_modules/**/*"

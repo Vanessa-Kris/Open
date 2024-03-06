@@ -11,9 +11,20 @@ import { faLink } from "@fortawesome/free-solid-svg-icons";
 
 export default function Footer() {
   return (
-    <Box component="footer">
+    <Box
+      component="footer"
+      align="center"
+      justifyContent="center"
+      mx="auto"
+      sx={{
+        color: "text.primary",
+        bgcolor: "secondary.main",
+        p: 2,
+      }}
+    >
       <Box>
-        <a
+        <Box
+          component="a"
           href="https:/smswithoutborders.com"
           target="_blank"
           rel="noopener noreferrer"
@@ -21,8 +32,9 @@ export default function Footer() {
           <FontAwesomeIcon
             style={{ color: "text.primary", paddingLeft: 10 }}
             icon={faXTwitter}
+            size="large"
           />
-        </a>
+        </Box>
         <a
           href="https:/smswithoutborders.com"
           target="_blank"

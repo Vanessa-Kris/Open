@@ -8,7 +8,7 @@
 //       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
 //         <Box
 //           component="img"
-//           src="/logo.png"
+//           src="/icon.png"
 //           sx={{
 //             width: "30px",
 //           }}
